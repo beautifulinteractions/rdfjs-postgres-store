@@ -1,0 +1,23 @@
+{
+  "name": "rdfjs-postgres-store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "asynciterator": "^1.1.0",
+    "bluebird": "^3.5.1",
+    "_knex": "^0.13.0",
+    "nanoid": "^1.0.1",
+    "pg": "^7.4.0",
+    "pg-query-stream": "^1.1.1",
+    "rdf-data-model": "^1.0.0"
+  },
+  "devDependencies": {
+    "asynctools": "github:jacoscaz/asynctools"
+  }
+}
