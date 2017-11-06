@@ -26,27 +26,43 @@ function streamToArray(readStream) {
   await store.createTables();
 
   const quads = [];
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 10000; i++) {
     quads.push(factory.quad(
       factory.namedNode('http://ex.com/s' + i),
       factory.namedNode('http://ex.com/p' + Math.floor(i % 4)),
-      factory.literal('literal'),
+      factory.literal('' + i, 'http://www.w3.org/2001/XMLSchema#integer'),
       factory.namedNode('http://ex.com/g')
     ));
   }
 
+  const preImport = Date.now();
   await asynctools.onEvent(store.import(new ArrayIterator(quads)), 'end');
+  const postImport = Date.now();
 
-  const count = await store.count(null, factory.namedNode('http://ex.com/p1'))
-  const found = await streamToArray(store.match(null, factory.namedNode('http://ex.com/p1')));
+  console.log('IMPORT TIME', (postImport - preImport) / 1000);
 
-  console.log('COUNT', count, found.length);
+  const preRemove = Date.now();
+  await asynctools.onEvent(store.removeMatches(), 'end');
+  const postRemove = Date.now();
 
-  await asynctools.onEvent(store.removeMatches(null, factory.namedNode('http://ex.com/p1')), 'end');
+  console.log('REMOVE TIME', (postRemove - preRemove) / 1000);
 
-  console.log('COUNT2', await store.count());
-
-  console.log('Done');
+  // const count = await store.estimate(null, null, [
+  //   { test: 'gt', comparate: factory.literal('5', 'http://www.w3.org/2001/XMLSchema#integer') },
+  //   { test: 'lt', comparate: factory.literal('10', 'http://www.w3.org/2001/XMLSchema#integer') }
+  // ]);
+  // const found = await streamToArray(store.match(null, null, [
+  //   { test: 'gt', comparate: factory.literal('5', 'http://www.w3.org/2001/XMLSchema#integer') },
+  //   { test: 'lt', comparate: factory.literal('10', 'http://www.w3.org/2001/XMLSchema#integer') }
+  // ]));
+  //
+  // console.log('COUNT', count, found.length);
+  //
+  // await asynctools.onEvent(store.removeMatches(null, factory.namedNode('http://ex.com/p1')), 'end');
+  //
+  // console.log('COUNT2', await store.estimate());
+  //
+  // console.log('Done');
 
   await store.close();
 
