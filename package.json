@@ -11,6 +11,7 @@
   "dependencies": {
     "asynciterator": "^1.1.0",
     "knex": "^0.13.0",
+    "n3": "^0.11.2",
     "nanoid": "^1.0.1",
     "pg": "^7.4.0",
     "pg-query-stream": "^1.1.1",
