@@ -52,11 +52,11 @@ function streamToArray(readStream) {
 
   console.log('COUNT', count, found.length);
 
-  const preRemove = Date.now();
-  await asynctools.waitForEvent(store.remove(new ArrayIterator(quads)), 'end');
-  const postRemove = Date.now();
-
-  console.log('REMOVE TIME', (postRemove - preRemove) / 1000);
+  // const preRemove = Date.now();
+  // await asynctools.waitForEvent(store.remove(new ArrayIterator(quads)), 'end');
+  // const postRemove = Date.now();
+  //
+  // console.log('REMOVE TIME', (postRemove - preRemove) / 1000);
 
 
   await store.close();
