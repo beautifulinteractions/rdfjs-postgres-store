@@ -36,7 +36,7 @@ function streamToArray(readStream) {
   }
 
   const preImport = Date.now();
-  await asynctools.onEvent(store.import(new ArrayIterator(quads), { batch: 10 }), 'end');
+  await asynctools.waitForEvent(store.import(new ArrayIterator(quads), { batch: 0 }), 'end');
   const postImport = Date.now();
 
   console.log('IMPORT TIME', (postImport - preImport) / 1000);
@@ -53,7 +53,7 @@ function streamToArray(readStream) {
   console.log('COUNT', count, found.length);
 
   const preRemove = Date.now();
-  await asynctools.onEvent(store.remove(new ArrayIterator(quads)), 'end');
+  await asynctools.waitForEvent(store.remove(new ArrayIterator(quads)), 'end');
   const postRemove = Date.now();
 
   console.log('REMOVE TIME', (postRemove - preRemove) / 1000);
