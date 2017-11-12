@@ -11,7 +11,11 @@
   "dependencies": {
     "asynciterator": "^1.1.0",
     "asynctools": "github:jacoscaz/asynctools#9c38a94a4dcd63ae66a52605962eab416fa56479",
+    "bluebird": "^3.5.1",
+    "debug": "^3.1.0",
     "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "lru-cache": "^4.1.1",
     "n3": "^0.11.2",
     "nanoid": "^1.0.1",
     "pg": "^7.4.0",
